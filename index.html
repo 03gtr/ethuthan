@@ -1,103 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
-<meta name="theme-color" content="#050403">
-<title>ETHUTHAN — Our Language. Our Presence.</title>
-<style>
-:root{--gold:#d8ad5b;--gold2:#f4d58e;--paper:#f0e5d0;--ink:#050403}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#020202;color:var(--paper);font-family:Georgia,"Times New Roman",serif}
-body{overflow:hidden}.app{position:relative;width:100%;height:100svh;max-width:430px;margin:auto;overflow:hidden;background:#020202}
-.stage{position:absolute;inset:0;background:#020202;overflow:hidden}
-.hero{position:absolute;inset:-2%;background:url("assets/ethuthan-hero.jpg") center top/cover no-repeat;transform:scale(1.01);transition:transform 5.5s cubic-bezier(.16,.76,.2,1),filter 2s,opacity 1.1s;filter:brightness(.66) contrast(1.05) saturate(.9)}
-.stage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.38),transparent 42%,rgba(0,0,0,.85) 100%),radial-gradient(circle at 50% 43%,transparent 0 30%,rgba(0,0,0,.48) 100%);pointer-events:none}
-.grain{position:absolute;inset:0;opacity:.08;z-index:4;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.05) 4px 5px);pointer-events:none}
-.boot{position:absolute;inset:0;z-index:20;background:#030302;display:flex;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}.boot.hide{opacity:0;visibility:hidden}
-.boot-inner{width:78%;text-align:center}.boot-kicker{font:700 8px Arial,sans-serif;letter-spacing:.45em;color:#9f9278}.boot-title{font-size:25px;letter-spacing:.16em;margin:12px 0 18px}.boot-line{height:2px;background:#17130d;border-radius:5px;overflow:hidden}.boot-line i{display:block;width:0;height:100%;background:linear-gradient(90deg,#6c4819,var(--gold2));box-shadow:0 0 16px var(--gold)}.boot-meta{margin-top:9px;display:flex;justify-content:space-between;font:700 8px Arial,sans-serif;letter-spacing:.16em;color:#8c8476}
-.reveal{position:absolute;z-index:8;left:18px;right:18px;top:14px;display:flex;justify-content:space-between;align-items:flex-start;opacity:0;transform:translateY(-8px);transition:opacity 1s,transform 1s}.reveal.show{opacity:1;transform:none}
-.brand{font-size:24px;letter-spacing:.17em;font-weight:700;text-shadow:0 2px 20px #000}.brand span{color:var(--gold2)}.state{border:1px solid #ffffff31;background:#060504a8;backdrop-filter:blur(10px);border-radius:999px;padding:8px 10px;font:700 8px Arial,sans-serif;letter-spacing:.18em}.state i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:5px;box-shadow:0 0 10px var(--gold)}
-.hero-copy{position:absolute;z-index:8;left:20px;right:20px;bottom:86px;text-align:center;opacity:0;transform:translateY(12px);transition:opacity 1s .2s,transform 1s .2s}.hero-copy.show{opacity:1;transform:none}
-.hero-copy .eyebrow{font:700 8px Arial,sans-serif;letter-spacing:.35em;color:var(--gold2)}.hero-copy h1{margin:8px 0 4px;font-size:48px;letter-spacing:.12em;line-height:.9;text-shadow:0 4px 24px #000}.hero-copy p{margin:0;font-size:11px;letter-spacing:.16em;color:#e1d6c1}
-.live-panel{position:absolute;z-index:12;inset:0;display:flex;align-items:center;justify-content:center;padding:26px 18px 90px;opacity:0;transform:scale(.96);pointer-events:none;transition:opacity 1s,transform 1s}.live-panel.show{opacity:1;transform:none;pointer-events:auto}
-.card{width:100%;border:1px solid #d8ad5b45;border-radius:24px;padding:22px 15px 16px;background:linear-gradient(180deg,rgba(10,8,5,.90),rgba(5,4,3,.86));box-shadow:0 24px 80px #000b;backdrop-filter:blur(14px);text-align:center}
-.card .kicker{font:700 8px Arial,sans-serif;letter-spacing:.36em;color:var(--gold2)}.card h2{font-size:38px;letter-spacing:.12em;margin:8px 0 4px}.card .sub{font-size:11px;line-height:1.65;color:#d8cdbb;margin:0 auto 16px;max-width:285px}
-.socials{display:grid;grid-template-columns:1fr 1fr;gap:8px}.socials a{height:49px;border:1px solid #ffffff21;border-radius:14px;background:#ffffff07;color:#f1e8d8;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font:700 9px Arial,sans-serif;transition:transform .18s,border-color .18s}.socials a:active{transform:scale(.96);border-color:var(--gold)}.sicon{font-size:16px;color:var(--gold2)}.footer-note{font:700 7px Arial,sans-serif;letter-spacing:.25em;color:#8d8577;margin-top:13px}
-.bottom{position:absolute;z-index:15;left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:7px;border:1px solid #ffffff25;border-radius:21px;background:#070604d4;backdrop-filter:blur(18px);opacity:0;transform:translateY(15px);transition:opacity 1s .3s,transform 1s .3s;pointer-events:none}.bottom.show{opacity:1;transform:none;pointer-events:auto}.bottom a{height:48px;border-radius:14px;border:1px solid #ffffff15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:#eee;font:700 8px Arial,sans-serif}.bottom a:active{border-color:var(--gold)}.bottom b{font:16px Georgia,serif;color:var(--gold2)}
-.wake .hero{transform:scale(1.08);filter:brightness(.86) contrast(1.06) saturate(1)}.zoom .hero{transform:scale(1.42) translateY(-8%);filter:brightness(.98) contrast(1.07) saturate(1.02)}
-@media(prefers-reduced-motion:reduce){.hero,.reveal,.hero-copy,.live-panel,.bottom{transition:none!important}.hero{transform:none!important}}
-@media(min-width:700px){.app{box-shadow:0 0 80px #000}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050403">
+  <title>ETHUTHAN — Our Language • Our Presence</title>
+  <meta name="description" content="ETHUTHAN — A premium Syriac cultural and language digital platform.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" as="image" href="assets/hero.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app" id="app">
-<section class="stage">
-<div class="hero"></div>
-<div class="grain"></div>
-</section>
 
-<div class="reveal" id="reveal">
-<div class="brand">ETHU<span>THAN</span></div>
-<div class="state"><i></i> LIVE</div>
-</div>
+  <!-- ══════════════ LOADING SEQUENCE ══════════════ -->
+  <div class="loading-screen" role="alert" aria-label="Loading ETHUTHAN" aria-live="assertive">
+    <div class="loading-content">
+      <p class="loading-text">THE ARCHIVE AWAKENS</p>
+      <div class="progress-container">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  </div>
 
-<section class="hero-copy" id="heroCopy">
-<div class="eyebrow">OUR LANGUAGE • OUR PRESENCE</div>
-<h1>ETHUTHAN</h1>
-<p>LANGUAGE · HERITAGE · CULTURE · PRESENCE</p>
-</section>
+  <!-- ══════════════ APP SHELL ══════════════ -->
+  <div class="app" id="app">
 
-<section class="live-panel" id="panel">
-<div class="card">
-<div class="kicker">OUR LANGUAGE • OUR PRESENCE</div>
-<h2>ETHUTHAN</h2>
-<p class="sub">A modern platform for Syriac language, heritage, culture and living presence.</p>
-<div class="socials">
-<a href="https://youtube.com/@ethuthan" target="_blank" rel="noopener"><span class="sicon">▶</span>YouTube</a>
-<a href="https://www.facebook.com/ourlanguage.ourpresence/" target="_blank" rel="noopener"><span class="sicon">f</span>Facebook</a>
-<a href="https://www.instagram.com/ethuthan" target="_blank" rel="noopener"><span class="sicon">◎</span>Instagram</a>
-<a href="https://www.tiktok.com/@ethuthan" target="_blank" rel="noopener"><span class="sicon">♪</span>TikTok</a>
-</div>
-<div class="footer-note">SYRIAC · HERITAGE · LIVING PRESENCE</div>
-</div>
-</section>
+    <!-- HERO -->
+    <div class="hero" aria-hidden="true">
+      <div class="hero-camera">
+        <picture>
+          <source srcset="assets/hero.webp" type="image/webp">
+          <img src="assets/hero.jpg" alt="" class="hero-image" id="heroImage">
+        </picture>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-vignette"></div>
+      <div class="hero-grain"></div>
+    </div>
 
-<nav class="bottom" id="bottom">
-<a href="https://youtube.com/@ethuthan" target="_blank" rel="noopener"><b>▶</b>YouTube</a>
-<a href="https://www.facebook.com/ourlanguage.ourpresence/" target="_blank" rel="noopener"><b>f</b>Facebook</a>
-<a href="https://www.instagram.com/ethuthan" target="_blank" rel="noopener"><b>◎</b>Instagram</a>
-<a href="https://www.tiktok.com/@ethuthan" target="_blank" rel="noopener"><b>♪</b>TikTok</a>
-</nav>
+    <!-- TOP LABELS -->
+    <header class="top-labels">
+      <span class="label label-language">Language</span>
+      <span class="label label-heritage">Heritage</span>
+      <span class="label label-culture">Culture</span>
+      <span class="label label-presence">Presence</span>
+    </header>
 
-<div class="boot" id="boot">
-<div class="boot-inner">
-<div class="boot-kicker">THE ARCHIVE AWAKENS</div>
-<div class="boot-title">ETHUTHAN</div>
-<div class="boot-line"><i id="bar"></i></div>
-<div class="boot-meta"><span id="status">RESTORING HISTORY</span><span id="pct">00%</span></div>
-</div>
-</div>
+    <!-- BRANDING -->
+    <main class="branding">
+      <div class="winged-disk">
+        <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="60" cy="35" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="60" cy="35" r="4" fill="currentColor"/>
+          <path d="M50 35 Q30 15 10 30 Q30 25 50 35" fill="currentColor"/>
+          <path d="M50 35 Q35 20 15 32 Q35 28 50 35" fill="currentColor" opacity="0.7"/>
+          <path d="M70 35 Q90 15 110 30 Q90 25 70 35" fill="currentColor"/>
+          <path d="M70 35 Q85 20 105 32 Q85 28 70 35" fill="currentColor" opacity="0.7"/>
+        </svg>
+      </div>
+      <h1 class="brand-name">ETHUTHAN</h1>
+      <p class="brand-subtitle">OUR LANGUAGE • OUR PRESENCE</p>
+    </main>
 
-<script>
-const app=document.getElementById('app'),boot=document.getElementById('boot'),bar=document.getElementById('bar'),pct=document.getElementById('pct'),status=document.getElementById('status'),reveal=document.getElementById('reveal'),copy=document.getElementById('heroCopy'),panel=document.getElementById('panel'),bottom=document.getElementById('bottom');
-let p=0;
-const labels=['RESTORING HISTORY','AWAKENING KNOWLEDGE','LOADING HERITAGE','SYSTEM READY'];
-const timer=setInterval(()=>{
- p=Math.min(100,p+7+Math.random()*10);
- bar.style.width=p+'%';pct.textContent=Math.floor(p)+'%';
- status.textContent=labels[Math.min(3,Math.floor(p/26))];
- if(p>=100){clearInterval(timer);setTimeout(awaken,650)}
-},260);
+    <!-- SOCIAL LINKS -->
+    <nav class="social-links" aria-label="Social media links">
+      <a href="https://youtube.com/@ethuthan" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
+      <a href="https://www.facebook.com/ourlanguage.ourpresence/" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/>
+        </svg>
+        <span>Facebook</span>
+      </a>
+      <a href="https://www.instagram.com/ethuthan" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.18 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.41-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.tiktok.com/@ethuthan" class="social-btn" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
+    </nav>
 
-function awaken(){
- boot.classList.add('hide');
- app.classList.add('wake');
- reveal.classList.add('show');
- copy.classList.add('show');
- setTimeout(()=>app.classList.add('zoom'),2600);
- setTimeout(()=>{panel.classList.add('show');bottom.classList.add('show');},3900);
-}
-</script>
-</main>
+  </div>
+
+  <noscript>
+    <div style="position:fixed;inset:0;background:#050403;color:#F0E5D0;display:flex;align-items:center;justify-content:center;font-family:serif;text-align:center;padding:2rem;">
+      <p>ETHUTHAN requires JavaScript to experience the full cinematic sequence.<br>Please enable JavaScript to continue.</p>
+    </div>
+  </noscript>
+
+  <script src="script.js"></script>
 </body>
 </html>

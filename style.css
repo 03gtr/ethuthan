@@ -1,0 +1,424 @@
+/* ═══════════════════════════════════════════════════════════════
+   ETHUTHAN — Cinematic Digital Business Card
+   Mobile-first • 390–430px primary viewport
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────── RESET & BASE ─────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-black: #050403;
+  --color-brown: #15100a;
+  --color-gold: #D8AD5B;
+  --color-gold-light: #F4D58E;
+  --color-ivory: #F0E5D0;
+
+  --font-heading: 'Cinzel', 'Times New Roman', serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  height: 100%;
+  height: 100dvh;
+  background: var(--color-black);
+  color: var(--color-ivory);
+  font-family: var(--font-ui);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─────────────── LOADING SCREEN ─────────────── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeOut 0.6s ease 3s forwards;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-text {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 0.5s forwards;
+}
+
+.progress-container {
+  width: 200px;
+  height: 2px;
+  background: rgba(216, 173, 91, 0.15);
+  margin-top: 1.5rem;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  border-radius: 1px;
+  animation: progress 2s ease 1s forwards;
+}
+
+/* ─────────────── APP SHELL ─────────────── */
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--color-black);
+}
+
+/* ─────────────── HERO ─────────────── */
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-camera {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  opacity: 0;
+  animation: heroReveal 2.5s ease 3s forwards;
+  will-change: opacity, transform;
+  transform-origin: center center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 4, 3, 0.75) 0%,
+    rgba(5, 4, 3, 0.25) 20%,
+    rgba(5, 4, 3, 0) 45%,
+    rgba(5, 4, 3, 0.25) 70%,
+    rgba(5, 4, 3, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(5, 4, 3, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
+}
+
+/* ─────────────── TOP LABELS ─────────────── */
+.top-labels {
+  position: absolute;
+  top: calc(1.25rem + var(--safe-top));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 2rem;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 6.5s forwards;
+}
+
+.label {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(240, 229, 208, 0.45);
+}
+
+/* ─────────────── BRANDING ─────────────── */
+.branding {
+  position: absolute;
+  bottom: calc(11rem + var(--safe-bottom));
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  padding: 0 2rem;
+}
+
+.winged-disk {
+  width: 56px;
+  height: 38px;
+  margin: 0 auto 1.25rem;
+  color: var(--color-gold);
+  opacity: 0;
+  animation: fadeIn 0.8s ease 7s forwards;
+  filter: drop-shadow(0 0 12px rgba(216, 173, 91, 0.3));
+}
+
+.winged-disk svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-gold-light);
+  text-shadow:
+    0 0 40px rgba(216, 173, 91, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 7.5s forwards;
+  margin-left: 0.22em;
+}
+
+.brand-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  color: rgba(240, 229, 208, 0.65);
+  margin-top: 0.9rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 8.2s forwards;
+}
+
+/* ─────────────── SOCIAL LINKS ─────────────── */
+.social-links {
+  position: absolute;
+  bottom: calc(2rem + var(--safe-bottom));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0 1.25rem;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 9s forwards;
+}
+
+.social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 68px;
+  height: 68px;
+  border: 1px solid rgba(216, 173, 91, 0.25);
+  border-radius: 14px;
+  background: rgba(5, 4, 3, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-ivory);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease, border-color 0.3s ease, background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.social-btn svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-gold);
+  transition: color 0.3s ease;
+}
+
+.social-btn:active {
+  transform: scale(0.93);
+  border-color: rgba(216, 173, 91, 0.55);
+  background: rgba(216, 173, 91, 0.08);
+}
+
+.social-btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* ─────────────── ANIMATIONS ─────────────── */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─────────────── REDUCED MOTION ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .loading-screen {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .hero-image,
+  .hero-camera,
+  .brand-name,
+  .brand-subtitle,
+  .social-links,
+  .winged-disk,
+  .top-labels {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .progress-bar {
+    animation: none;
+    width: 100%;
+  }
+}
+
+/* ─────────────── RESPONSIVE ─────────────── */
+@media (min-width: 481px) {
+  .app {
+    border-left: 1px solid rgba(216, 173, 91, 0.08);
+    border-right: 1px solid rgba(216, 173, 91, 0.08);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-name {
+    font-size: 2.1rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+  }
+
+  .social-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+  }
+
+  .social-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .winged-disk {
+    width: 46px;
+    height: 32px;
+  }
+
+  .branding {
+    bottom: calc(10rem + var(--safe-bottom));
+  }
+}
+
+/* ─────────────── LANDSCAPE ─────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .branding {
+    bottom: calc(8rem + var(--safe-bottom));
+  }
+
+  .brand-name {
+    font-size: 1.8rem;
+  }
+
+  .social-btn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .social-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
